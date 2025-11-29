@@ -1,0 +1,92 @@
+# ------------------------------------------------------------
+# PYTHON PROFESSIONAL .gitignore TEMPLATE
+# ------------------------------------------------------------
+
+# Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Python Bytecode / Cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter Notebook Checkpoints
+.ipynb_checkpoints/
+
+# Distribution / Packaging
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+coverage.xml
+.cache
+.pytest_cache/
+pytestdebug.log
+
+# Django specific
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media/
+
+# Flask specific
+instance/
+.webassets-cache
+
+# FastAPI / Starlette
+*.db
+
+# Scrapy
+.scrapy
+
+# Environment Variables / Secrets
+.env
+.env.*
+!.env.example
+
+# IDE / Editor stuff
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS Specific
+.DS_Store
+Thumbs.db
+
+# Other
+*.sqlite3
