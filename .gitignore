@@ -90,3 +90,11 @@ Thumbs.db
 
 # Other
 *.sqlite3
+
+# ------------------------------------------------------------
+# DATASETS (do not push dataset files)
+# ------------------------------------------------------------
+Data/Datasets/*
+!Data/Datasets/.gitkeep
+!Data/Datasets/template_data.yaml
+
