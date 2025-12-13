@@ -98,3 +98,6 @@ Data/Datasets/*
 !Data/Datasets/.gitkeep
 !Data/Datasets/template_data.yaml
 
+Data/DataModels/*
+!Data/DataModels/.gitkeep
+
