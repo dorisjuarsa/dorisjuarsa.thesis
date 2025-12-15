@@ -36,7 +36,7 @@ YAML_PATH = YOLO_DIR / "data.yaml"
 # ==================================================
 # CONFIG
 # ==================================================
-CLASSES = ["BAS", "EOS", "LIM", "MON", "NEU"]
+CLASSES = ["BAS", "EOS", "NEU", "LIM", "MON"]
 
 RATIOS = {
     "train": 0.7,
