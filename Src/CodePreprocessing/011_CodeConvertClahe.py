@@ -3,12 +3,12 @@ import shutil
 import cv2
 
 # ==================================================
-# BASE DIR (WAJIB)
+# BASE DIR (KONSISTEN DENGAN PROJECT)
 # ==================================================
 BASE_DIR = Path(__file__).resolve().parent
 
 # ==================================================
-# DATASET PATH (KONSISTEN DENGAN PROJECT)
+# DATASET PATH
 # ==================================================
 BASE_DATASET = (
     BASE_DIR
@@ -29,11 +29,16 @@ CLAHE_DATASET = (
 ).resolve()
 
 # ==================================================
-# VALIDATION PATH
+# VALIDATION
 # ==================================================
 if not BASE_DATASET.exists():
     raise FileNotFoundError(
         f"❌ BASE_DATASET tidak ditemukan:\n{BASE_DATASET}"
+    )
+
+if not (BASE_DATASET / "images").exists():
+    raise FileNotFoundError(
+        f"❌ Folder images tidak ditemukan:\n{BASE_DATASET / 'images'}"
     )
 
 if not (BASE_DATASET / "labels").exists():
@@ -41,33 +46,45 @@ if not (BASE_DATASET / "labels").exists():
         f"❌ Folder labels tidak ditemukan:\n{BASE_DATASET / 'labels'}"
     )
 
+if CLAHE_DATASET.exists():
+    raise FileExistsError(
+        f"❌ Folder target sudah ada (hapus dulu jika mau regenerate):\n{CLAHE_DATASET}"
+    )
+
 # ==================================================
 # CLAHE CONFIG
 # ==================================================
+CLAHE_CLIP = 2.0
+CLAHE_TILE = (8, 8)
+
 clahe = cv2.createCLAHE(
-    clipLimit=2.0,
-    tileGridSize=(8, 8)
+    clipLimit=CLAHE_CLIP,
+    tileGridSize=CLAHE_TILE
 )
 
 # ==================================================
-# COPY LABELS + YAML
+# COPY LABELS
 # ==================================================
-print("📁 Copy labels & data.yaml...")
-
-if CLAHE_DATASET.exists():
-    raise FileExistsError(
-        f"❌ Folder target sudah ada:\n{CLAHE_DATASET}"
-    )
+print("📁 Copy labels...")
 
 shutil.copytree(
     BASE_DATASET / "labels",
     CLAHE_DATASET / "labels"
 )
 
-shutil.copy2(
-    BASE_DATASET / "data.yaml",
-    CLAHE_DATASET / "data.yaml"
+# ==================================================
+# GENERATE data.yaml (AUTO PATH)
+# ==================================================
+print("📝 Generate data.yaml (auto path)...")
+
+base_yaml_text = (BASE_DATASET / "data.yaml").read_text()
+
+fixed_yaml_text = base_yaml_text.replace(
+    f"path: {BASE_DATASET.as_posix()}",
+    f"path: {CLAHE_DATASET.as_posix()}"
 )
+
+(CLAHE_DATASET / "data.yaml").write_text(fixed_yaml_text)
 
 # ==================================================
 # APPLY CLAHE TO IMAGES
@@ -87,13 +104,16 @@ for split in ["train", "val", "test"]:
     for img_path in src_img_dir.glob("*.jpg"):
         img = cv2.imread(str(img_path))
         if img is None:
-            raise RuntimeError(f"❌ Gagal baca image: {img_path}")
+            raise RuntimeError(
+                f"❌ Gagal membaca image:\n{img_path}"
+            )
 
+        # --- CLAHE on L channel ---
         lab = cv2.cvtColor(img, cv2.COLOR_BGR2LAB)
         l, a, b = cv2.split(lab)
-        l = clahe.apply(l)
+        l_clahe = clahe.apply(l)
         img_clahe = cv2.cvtColor(
-            cv2.merge((l, a, b)),
+            cv2.merge((l_clahe, a, b)),
             cv2.COLOR_LAB2BGR
         )
 
@@ -103,5 +123,6 @@ for split in ["train", "val", "test"]:
         )
 
 print("\n✅ DATASET CLAHE BERHASIL DIBUAT")
-print(f"📂 Base  : {BASE_DATASET}")
+print(f"📂 BASE  : {BASE_DATASET}")
 print(f"📂 CLAHE: {CLAHE_DATASET}")
+print("🚀 Siap untuk training YOLO (komparasi base vs CLAHE)")
