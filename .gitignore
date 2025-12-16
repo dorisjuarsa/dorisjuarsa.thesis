@@ -113,3 +113,5 @@ yolo8m.pt
 yolo8l.pt
 yolo8x.pt
 
+Src/OutputTesting/*
+

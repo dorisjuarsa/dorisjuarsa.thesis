@@ -16,7 +16,7 @@ BASE_DATASET = (
     / ".."
     / "Data"
     / "Datasets"
-    / "DorisjuarsaDatasetYoloBaseSize"
+    / "DorisjuarsaDatasetYoloBaseSizeToScale0_25"
 ).resolve()
 
 CLAHE_DATASET = (
@@ -25,7 +25,7 @@ CLAHE_DATASET = (
     / ".."
     / "Data"
     / "Datasets"
-    / "DorisjuarsaDatasetYoloBaseSizeClahe"
+    / "DorisjuarsaDatasetYoloBaseSizeToScale0_25Clahe"
 ).resolve()
 
 # ==================================================
