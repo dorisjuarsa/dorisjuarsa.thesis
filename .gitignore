@@ -114,4 +114,4 @@ yolov8l.pt
 yolov8x.pt
 
 Src/OutputTesting/*
-
+Data/DataTesting/*

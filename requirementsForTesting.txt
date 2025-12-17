@@ -30,6 +30,7 @@ nvidia-nvshmem-cu12==3.3.20
 nvidia-nvtx-cu12==12.8.90
 opencv-python==4.12.0.88
 packaging==25.0
+pandas==2.3.3
 pillow==12.0.0
 polars==1.36.1
 polars-runtime-32==1.36.1
@@ -39,6 +40,7 @@ PySide6==6.10.1
 PySide6_Addons==6.10.1
 PySide6_Essentials==6.10.1
 python-dateutil==2.9.0.post0
+pytz==2025.2
 PyYAML==6.0.3
 requests==2.32.5
 scipy==1.16.3
@@ -51,6 +53,7 @@ torchaudio==2.9.1
 torchvision==0.24.1
 triton==3.5.1
 typing_extensions==4.15.0
+tzdata==2025.3
 ultralytics==8.3.239
 ultralytics-thop==2.0.18
 urllib3==2.6.2
