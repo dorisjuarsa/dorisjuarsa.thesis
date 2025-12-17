@@ -114,5 +114,13 @@ yolov8l.pt
 yolov8x.pt
 
 Src/OutputTesting/*
+# Ignore semua DataTesting
 Data/DataTesting/*
+
+# Unignore folder Input
+!Data/DataTesting/Input/
+!Data/DataTesting/Input/**
+
+# Unignore folder HasilCaptureCamera
+!Data/DataTesting/Input/HasilCaptureCamera/
 !Data/DataTesting/Input/HasilCaptureCamera/.gitkeep
