@@ -122,5 +122,5 @@ Data/DataTesting/*
 !Data/DataTesting/Input/**
 
 # Unignore folder HasilCaptureCamera
-!Data/DataTesting/Input/HasilCaptureCamera/
+Data/DataTesting/Input/HasilCaptureCamera/
 !Data/DataTesting/Input/HasilCaptureCamera/.gitkeep
