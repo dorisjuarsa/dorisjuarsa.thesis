@@ -1,4 +1,5 @@
 from pathlib import Path
+import random
 import shutil
 
 # ==================================================
@@ -44,6 +45,7 @@ RATIOS = {
 }
 
 IMG_EXT = ".jpg"
+random.seed(42)
 
 # ==================================================
 # CREATE YOLO DIRECTORY STRUCTURE
@@ -53,13 +55,13 @@ for split in RATIOS.keys():
     (YOLO_DIR / "labels" / split).mkdir(parents=True, exist_ok=True)
 
 # ==================================================
-# SPLITTING PROCESS (DETERMINISTIC / NON-RANDOM)
+# SPLITTING PROCESS (STRATIFIED BY PREFIX)
 # ==================================================
-print("🔄 Mulai proses splitting dataset (DETERMINISTIC)...\n")
+print("🔄 Mulai proses splitting dataset...\n")
 
 for cls in CLASSES:
-    # SORTED = urutan tetap, tidak tergantung OS / waktu
     images = sorted(DATASET_DIR.glob(f"{cls}_*{IMG_EXT}"))
+    random.shuffle(images)
 
     n_total = len(images)
     n_train = int(n_total * RATIOS["train"])
