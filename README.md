@@ -38,4 +38,6 @@ pip freeze > requirements.txt
 Folder `venv/` **tidak diupload ke GitHub**.  
 Setiap komputer harus membuat venv-nya sendiri.
 
+coba
+
 
